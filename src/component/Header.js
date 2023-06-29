@@ -34,7 +34,6 @@ const Header = () => {
   };
 
   const getSearchResult = async () => {
-    console.log(searchText);
     const data = await fetch(YOUTUBE_SEARCH_API + searchText);
     const json = await data.json();
     setSearchList(json[1]);
@@ -90,10 +89,11 @@ const Header = () => {
         {showSuggestion && searchText !== undefined && (
           <div className="absolute bg-white w-[430px] shadow-lg rounded-md border border-gray-100">
             <ul>
-              {searchList.map((list) => {
+              {searchList.map((list,index) => {
                 return (
                   <li
                     className="hover:bg-gray-100 px-5 py-1"
+                    key={index}
                     onClick={() => {
                       setSearchText(list);
                       navigate("/search?q=" + list);
